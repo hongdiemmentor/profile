@@ -338,7 +338,7 @@ function loadBlogPosts() {
                 <div class="blog-thumbnail">
                     ${post.thumbnail ?
                 `<img src="${post.thumbnail}" alt="${post.title}">` :
-                `<img src="images/profile_photo.png" alt="${post.title}">`
+                `<img src="images/profile_photo.jpg" alt="${post.title}">`
             }
                 </div>
                 <div class="blog-content">
