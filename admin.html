@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Quản lý Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>🎨 Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#profile" class="nav-item active" data-section="profile">
+                    <span class="icon">👤</span>
+                    <span>Ảnh Profile</span>
+                </a>
+                <a href="#certificates" class="nav-item" data-section="certificates">
+                    <span class="icon">📜</span>
+                    <span>Bằng cấp</span>
+                </a>
+                <a href="#achievements" class="nav-item" data-section="achievements">
+                    <span class="icon">🏆</span>
+                    <span>Thành tựu</span>
+                </a>
+                <a href="#blog" class="nav-item" data-section="blog">
+                    <span class="icon">✍️</span>
+                    <span>Viết bài</span>
+                </a>
+                <a href="#gallery" class="nav-item" data-section="gallery">
+                    <span class="icon">🖼️</span>
+                    <span>Thư viện ảnh</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn-back">← Về trang chủ</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="section-title">Quản lý ảnh Profile</h1>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="preview-btn">👁️ Xem trước</button>
+                    <button class="btn btn-primary" id="save-btn">💾 Lưu thay đổi</button>
+                </div>
+            </header>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="content-section active">
+                <div class="card">
+                    <h3>Ảnh đại diện chính</h3>
+                    <div class="upload-area">
+                        <div class="image-preview" id="profile-preview">
+                            <img src="images/profile_photo.png" alt="Profile" id="profile-img">
+                        </div>
+                        <div class="upload-controls">
+                            <input type="file" id="profile-upload" accept="image/*" hidden>
+                            <label for="profile-upload" class="btn btn-upload">
+                                📤 Chọn ảnh mới
+                            </label>
+                            <p class="upload-hint">Khuyến nghị: 800x800px, định dạng JPG/PNG</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certificates Section -->
+            <section id="certificates-section" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Quản lý bằng cấp & chứng chỉ</h3>
+                        <button class="btn btn-primary" id="add-cert-btn">+ Thêm chứng chỉ</button>
+                    </div>
+                    <div class="cert-grid" id="cert-list">
+                        <!-- Certificate items will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section id="achievements-section" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Quản lý ảnh thành tựu</h3>
+                        <button class="btn btn-primary" id="add-achievement-btn">+ Thêm thành tựu</button>
+                    </div>
+                    <div class="achievements-list" id="achievements-list">
+                        <!-- Achievement items will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog Section -->
+            <section id="blog-section" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Viết bài mới</h3>
+                        <button class="btn btn-secondary" id="blog-list-btn">📋 Danh sách bài viết</button>
+                    </div>
+                    <form id="blog-form">
+                        <div class="form-group">
+                            <label for="blog-title">Tiêu đề bài viết</label>
+                            <input type="text" id="blog-title" placeholder="Nhập tiêu đề..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="blog-category">Danh mục</label>
+                            <select id="blog-category">
+                                <option value="education">Giáo dục</option>
+                                <option value="technology">Công nghệ</option>
+                                <option value="business">Kinh doanh</option>
+                                <option value="personal">Phát triển bản thân</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="blog-thumbnail">Ảnh đại diện bài viết</label>
+                            <div class="thumbnail-upload">
+                                <div class="thumbnail-preview" id="blog-thumbnail-preview">
+                                    <span class="placeholder-text">Chưa có ảnh</span>
+                                </div>
+                                <input type="file" id="blog-thumbnail" accept="image/*" hidden>
+                                <label for="blog-thumbnail" class="btn btn-upload">
+                                    📷 Chọn ảnh
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="blog-excerpt">Tóm tắt</label>
+                            <textarea id="blog-excerpt" rows="3" placeholder="Mô tả ngắn về bài viết..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="blog-content">Nội dung bài viết</label>
+                            <div class="editor-toolbar">
+                                <button type="button" class="toolbar-btn" data-command="bold" title="Bold">
+                                    <strong>B</strong>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="italic" title="Italic">
+                                    <em>I</em>
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="underline" title="Underline">
+                                    <u>U</u>
+                                </button>
+                                <span class="toolbar-divider"></span>
+                                <button type="button" class="toolbar-btn" data-command="insertUnorderedList"
+                                    title="Bullet List">
+                                    ≡
+                                </button>
+                                <button type="button" class="toolbar-btn" data-command="insertOrderedList"
+                                    title="Numbered List">
+                                    ≣
+                                </button>
+                                <span class="toolbar-divider"></span>
+                                <button type="button" class="toolbar-btn" id="insert-image-btn" title="Insert Image">
+                                    🖼️
+                                </button>
+                            </div>
+                            <div id="blog-content" class="content-editor" contenteditable="true"
+                                placeholder="Viết nội dung bài viết tại đây..."></div>
+                            <input type="file" id="content-image" accept="image/*" hidden multiple>
+                        </div>
+                        <div class="form-group">
+                            <label for="blog-tags">Tags (phân cách bằng dấu phẩy)</label>
+                            <input type="text" id="blog-tags" placeholder="AI, Giáo dục, Công nghệ...">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="save-draft-btn">💾 Lưu nháp</button>
+                            <button type="submit" class="btn btn-primary">🚀 Xuất bản</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Blog List Modal -->
+                <div id="blog-list-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Danh sách bài viết</h3>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="blog-posts-list" class="blog-posts-list">
+                                <!-- Blog posts will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section id="gallery-section" class="content-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Thư viện ảnh</h3>
+                        <div class="upload-controls">
+                            <input type="file" id="gallery-upload" accept="image/*" multiple hidden>
+                            <label for="gallery-upload" class="btn btn-primary">
+                                📤 Upload ảnh
+                            </label>
+                        </div>
+                    </div>
+                    <div class="gallery-grid" id="gallery-grid">
+                        <!-- Gallery items will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div id="cert-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thêm chứng chỉ</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="cert-form">
+                    <div class="form-group">
+                        <label for="cert-name">Tên chứng chỉ</label>
+                        <input type="text" id="cert-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cert-provider">Tổ chức cấp</label>
+                        <input type="text" id="cert-provider" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cert-category">Danh mục</label>
+                        <select id="cert-category">
+                            <option value="ai">AI & Công nghệ</option>
+                            <option value="business">Kinh doanh</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="other">Khác</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cert-image">Ảnh chứng chỉ</label>
+                        <input type="file" id="cert-image" accept="image/*" required>
+                        <div class="image-preview-small" id="cert-preview"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary modal-close">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement Modal -->
+    <div id="achievement-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thêm thành tựu</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="achievement-form">
+                    <div class="form-group">
+                        <label for="achievement-title">Tiêu đề</label>
+                        <input type="text" id="achievement-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-desc">Mô tả</label>
+                        <textarea id="achievement-desc" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-year">Năm</label>
+                        <input type="number" id="achievement-year" min="2000" max="2030" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="achievement-image">Ảnh minh họa</label>
+                        <input type="file" id="achievement-image" accept="image/*" required>
+                        <div class="image-preview-small" id="achievement-preview"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary modal-close">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+
+</html>
